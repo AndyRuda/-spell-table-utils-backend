@@ -1,6 +1,7 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult, Handler } from "aws-lambda";
 import SendCard from "./processors/SendCard";
 import JoinGame from "./processors/JoinGame";
+import leaveGame from "./processors/leaveGame";
 
 
 export const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (event) => {  
@@ -12,6 +13,8 @@ export const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = asy
     case '$default':
       break;
     case 'disconnect':
+      const LeaveGame = new leaveGame(event)
+      LeaveGame.run()
       break;
     case 'send-card':
       const SendCardHandler = new SendCard(event);

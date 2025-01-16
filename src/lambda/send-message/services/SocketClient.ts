@@ -20,7 +20,7 @@ export default class SocketClient {
         if (error.name === "GoneException") {
           return Promise.reject({ reason: 'GONE_CONNECTION', ConnectionId: id });
         }
-        return Promise.reject({ reason: '💀 INTERNAL SERVER ERROR', ConnectionId: id});
+        return Promise.reject({ reason: '💀 INTERNAL SERVER ERROR'});
 
       }
     } 

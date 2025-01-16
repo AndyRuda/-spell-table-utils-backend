@@ -3,6 +3,7 @@ import { errors } from "../../const";
 export interface joinGameBody{
     connectionId: string
     gameId: string
+    accountId: string
 }
 
 export class GameValidator {
@@ -14,7 +15,7 @@ export class GameValidator {
     public process(): joinGameBody{
         const connectionId = this.validateRequestContext()
         const body = this.validateRequestBody()
-        return { connectionId, gameId: body.gameId }
+        return { connectionId, gameId: body.gameId, accountId: body.accountId }
     }
 
     private validateRequestContext(){
@@ -31,6 +32,9 @@ export class GameValidator {
         const body = JSON.parse(this.event.body)
         if(!body.gameId){
             throw new Error(errors.INVALID_BODY('gameId'))
+        }
+        if(!body.accountId){
+            throw new Error(errors.INVALID_BODY('accountId'))
         }
         return body
     }
